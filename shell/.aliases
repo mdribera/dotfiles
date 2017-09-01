@@ -1,0 +1,22 @@
+alias reload=". ~/.zshrc"
+
+alias gst="git status"
+alias gsth="git stash"
+alias gstha="git stash apply"
+alias gd="git diff"
+alias grh="git reset --hard"
+
+alias localip="ipconfig getifaddr en0"
+alias extip="curl ipecho.net/plain; echo"
+
+alias bye="pmset displaysleepnow"
+
+local _webstorm_path="/usr/local/bin/webstorm"
+if [[ -a $_webstorm_path ]]; then
+	alias ws=webstorm
+fi
+
+local _atom_path="/usr/local/bin/atom"
+if [[ -a $_atom_path ]]; then
+	alias at=atom
+fi

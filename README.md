@@ -1,7 +1,7 @@
 # dotfiles
 
 ## Setup
-`/bin/link-dots` will create symlinks of all think files in `/shell` in your `$HOME` directory
+`/bin/link-dots` will create symlinks from all the files in `/shell` to your `$HOME` directory
 
 ## Files included
 - `/shell/.aliases` - helpful shortcuts for git, text editors, and osx

@@ -33,7 +33,7 @@ get_antibody () {
   info "Getting antibody..."
 
   if ! [ -x "$(command -v antibody)" ]; then
-    if ! [ -x "$(command -v brew)" ]; then
+    if [ -x "$(command -v brew)" ]; then
       brew install getantibody/tap/antibody || brew upgrade antibody
     else
       curl -sL https://git.io/antibody | sh -s

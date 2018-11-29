@@ -1,6 +1,7 @@
 [user]
 	name = Mark Ribera
 	email = markdribera@gmail.com
+	signingkey = CEB609C79D93F340
 [push]
 	default = simple
 [core]

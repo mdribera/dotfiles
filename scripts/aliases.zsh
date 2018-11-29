@@ -1,19 +1,22 @@
 alias reload=". ~/.zshrc"
 
 alias gst="git status"
-alias gsth="git stash"
-alias gstha="git stash apply"
-alias gd="git diff"
-alias grh="git reset --hard"
+alias l="ls -lAh"
 
 alias localip="ipconfig getifaddr en0"
-alias extip="curl ipecho.net/plain; echo"
+alias extip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias iplz="localip && extip"
 
 alias bye="pmset displaysleepnow"
 
 local _webstorm_path="/usr/local/bin/webstorm"
 if [[ -a $_webstorm_path ]]; then
 	alias ws=webstorm
+fi
+
+local _pycharm_path="/usr/local/bin/charm"
+if [[ -a $_pycharm_path ]]; then
+	alias pc=charm
 fi
 
 local _atom_path="/usr/local/bin/atom"

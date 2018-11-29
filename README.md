@@ -1,21 +1,25 @@
 # dotfiles
 
-## Setup
-`/bin/link-dots` will create symlinks from all the files in `/shell` to your `$HOME` directory
+## Getting started
+Execute `/install.sh` and it'll do all of the work.
 
-## Files included
-- `/shell/.aliases` - helpful shortcuts for git, text editors, and osx
-- `/shell/.antigenrc` - sourcing for zsh utilities and theme
-- `/shell/.functions` - useful shortcuts and commands
-- `/shell/.gitconfig` - global git configurations
-- `/shell/.gitignore_global` - things to globally ignore
-- `/shell/.zlogin` - sourced after `.zshrc` during an interactive shell login
-- `/shell/.zshenv` - source first in all shell modes
-- `/shell/.zshrc` - pulls in `.aliases`, `.functions`, and `.antigenrc`
+## What's included
+Files and directories matching `/home/.*` will be linked in your `$HOME` directory.
+
+### zsh scripts and configuration
+- `/home/.zshenv` - sourced first in all shell modes
+- `/home/.zshrc` - the main event
+- `/home/.zlogin` - sourced after `.zshrc` during an interactive shell login
+- `/home/zsh_plugins.txt` - a list of zsh plugins for antibody to install
+- `/scripts/common.zsh` - useful shortcuts and shared functions
+- `/scripts/aliases.zsh` - some aliases for git, text editors, and osx
+- `/scripts/config.zsh` - command line configuration
+### git
+- `/home/.gitconfig` - global git configurations
+- `/home/.gitignore_global` - things to globally ignore
 
 ## TODO
-- secrets (ssh, env, etc) encryption and compression for syncing & updating across systems
-- file watching for syncing & updating configurations across systems
-- install script for setting up a new machine (homebrew, antigen.zsh, casks)
-- hammerspoon utilities
-- other system configurations
+- automated homebrew/linuxbrew installation and brewfile
+- secrets encryption and compression
+- hammerspoon plugins
+- bitbar plugins

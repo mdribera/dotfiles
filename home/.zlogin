@@ -1,5 +1,5 @@
 # Call this when you want to use nvm
-nvm-up () {
+js-up () {
   # automatically `nvm use` whenever you enter a directory that
   # contains an `.nvmrc` and specifies a version of node
   autoload -U add-zsh-hook
@@ -24,7 +24,7 @@ py-up () {
 }
 
 # When you're going to work in ruby do this first
-rvm-up () {
+rb-up () {
   export RVM_DIR="$HOME/.rvm"
   [[ -s "$RVM_DIR/scripts/rvm" ]] && source "$RVM_DIR/scripts/rvm"
   # Add RVM to PATH

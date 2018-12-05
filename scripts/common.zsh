@@ -138,3 +138,17 @@ whois () {
 
 	/usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
 }
+
+# Print Finder Directory
+pfd () {
+  osascript 2>/dev/null <<EOF
+    tell application "Finder"
+      return POSIX path of (target of window 1 as alias)
+    end tell
+EOF
+}
+
+# cd to current finder directory
+cdf () {
+  cd "$(pfd)"
+}

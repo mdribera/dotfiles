@@ -1,6 +1,8 @@
 alias reload=". ~/.zshrc"
 
 alias gst="git status"
+alias gd="git diff"
+alias gc="git commit -m $1"
 alias l="ls -lAh"
 
 alias localip="ipconfig getifaddr en0"

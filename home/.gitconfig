@@ -1,11 +1,11 @@
 [user]
 	name = Mark Ribera
 	email = markdribera@gmail.com
-	signingkey = CEB609C79D93F340
+	signingKey = CEB609C79D93F340
 [push]
 	default = simple
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.gitignore_global
 	autocrlf = input
 	editor = vim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol

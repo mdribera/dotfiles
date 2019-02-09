@@ -8,14 +8,14 @@ setopt PROMPT_SUBST
 local prompt_dir="%{$fg_bold[cyan]%}%(6~|%-4~/…/%1~|%5~)%{$reset_color%}"
 
 if [[ -n $SSH_CONNECTION ]]; then
-  local prompt_host="%{$fg[white]%}%n@%m%{$reset_color%} "
+  local prompt_host="%{$fg_bold[white]%}%n@%m%{$reset_color%}"
 else
   local prompt_host=""
 fi
 
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
 PROMPT='${prompt_dir} $(git_prompt_info)
-${prompt_host}${ret_status}'
+${prompt_host}${ret_status} '
 
 GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
 GIT_PROMPT_SUFFIX="%{$reset_color%} "
@@ -85,3 +85,6 @@ setopt hist_verify              # show before executing history commands
 setopt inc_append_history       # add commands as they are typed, don't wait until shell exit
 setopt share_history            # share hist between sessions
 setopt bang_hist                # !keyword
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down

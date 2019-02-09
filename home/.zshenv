@@ -10,3 +10,5 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='atom'
 fi
+
+export HISTORY_SUBSTRING_SEARCH_FUZZY=false

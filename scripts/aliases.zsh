@@ -4,7 +4,12 @@ alias gst="git status"
 alias gd="git diff"
 alias gc="git commit -m $1"
 
-alias l="ls -lAh"
+case $OS_TYPE in
+  'Linux')   LS_OPTIONS='-lAh --color=auto --group-directories-first' ;;
+  'Darwin')  LS_OPTIONS='-lAh' ;;
+esac
+
+alias l="ls $LS_OPTIONS"
 
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias extip="curl https://ipinfo.io/ip"

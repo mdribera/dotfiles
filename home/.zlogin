@@ -6,8 +6,17 @@ js-up () {
   add-zsh-hook chpwd load-nvmrc
 
   export NVM_DIR="$HOME/.nvm"
-  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
+  if [ -x "$(command -v brew)" ] && [ -s $(brew --prefix nvm) ]; then
+    source $(brew --prefix nvm)/nvm.sh
+  elif [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+  else
+    fail "Couldn't find nvm..."
+  fi
+
   success "Ready to node!"
+  info "$(nvm current)"
 }
 
 load-nvmrc () {

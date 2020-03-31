@@ -15,6 +15,8 @@ alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo
 alias extip="curl https://ipinfo.io/ip"
 alias iplz="localip && extip"
 
+alias server="python -m http.server"
+
 alias bye="pmset displaysleepnow"
 
 local _webstorm_path="/usr/local/bin/webstorm"

@@ -13,7 +13,7 @@ else
   local prompt_host=""
 fi
 
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
+local ret_status="%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜)%{$reset_color%}"
 PROMPT='${prompt_dir} $(git_prompt_info)
 ${prompt_host}${ret_status} '
 
@@ -89,3 +89,7 @@ setopt bang_hist                # !keyword
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey '[D' backward-word
+bindkey '[C' forward-word
+bindkey '^[a' beginning-of-line
+bindkey '^[e' end-of-line

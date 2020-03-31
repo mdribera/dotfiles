@@ -29,6 +29,31 @@ link_dotfiles () {
   success "Linked dotfiles!"
 }
 
+install_zsh () {
+  info "Installing zsh..."
+
+  if ! [ -x "$(command -v zsh)" ]; then
+    if [ -x "$(command -v brew)" ]; then
+      brew install zsh
+    else
+      sudo apt install zsh
+    fi
+  fi
+
+  local zsh_path="$(which zsh)"
+  info $zsh_path
+
+  if [ $zsh_path == $SHELL ]; then
+    sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s $(which zsh)
+  fi
+
+  if [ $? -eq 0 ]; then
+    success "Installed zsh!"
+  else
+    fail "Zsh install failed :("
+  fi
+}
+
 get_antibody () {
   info "Getting antibody..."
 
@@ -36,7 +61,7 @@ get_antibody () {
     if [ -x "$(command -v brew)" ]; then
       brew install getantibody/tap/antibody || brew upgrade antibody
     else
-      curl -sL https://git.io/antibody | sh -s
+      curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
     fi
   fi
 
@@ -54,5 +79,6 @@ get_bundles () {
 
 link_dotdir
 link_dotfiles
+install_zsh
 get_antibody
 get_bundles

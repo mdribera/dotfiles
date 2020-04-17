@@ -4,12 +4,15 @@ alias gst="git status"
 alias gd="git diff"
 alias gc="git commit -m $1"
 
-case $OS_TYPE in
-  'Linux')   LS_OPTIONS='-lAh --color=auto --group-directories-first' ;;
-  'Darwin')  LS_OPTIONS='-lAh' ;;
-esac
+if [ "$OS_TYPE" = "Darwin" ]; then
+  if [ -x "$(command -v gls)" ]; then
+    alias ls='gls'
+  else
+    info "Run `brew install coreutils` to get GNU."
+  fi
+fi
 
-alias l="ls $LS_OPTIONS"
+alias l="LC_COLLATE=C ls -lAh --color=auto --group-directories-first"
 
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias extip="curl https://ipinfo.io/ip"

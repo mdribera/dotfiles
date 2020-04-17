@@ -1,22 +1,41 @@
-# Call this when you want to use nvm
-js-up () {
-  # automatically `nvm use` whenever you enter a directory that
-  # contains an `.nvmrc` and specifies a version of node
-  autoload -U add-zsh-hook
-  add-zsh-hook chpwd load-nvmrc
+local node_commands=(nvm node npm)
 
-  export NVM_DIR="$HOME/.nvm"
-
-  if [ -x "$(command -v brew)" ] && [ -s $(brew --prefix nvm) ]; then
-    source $(brew --prefix nvm)/nvm.sh
-  elif [ -s "$NVM_DIR/nvm.sh" ]; then
-    source "$NVM_DIR/nvm.sh"
-  else
-    fail "Couldn't find nvm..."
+# Lazy load your node environment
+for command in $node_commands
+do
+  if [[ ! -x $command ]]; then
+    $command() {
+      info "Node environment isn't setup. Just a sec..."
+      js-up && $0 "$@"
+    }
   fi
+done
 
-  success "Ready to node!"
-  info "$(nvm current)"
+# Call this when you want to use node
+js-up () {
+  if [ ! -d "$HOME/.nvm" ]; then
+    fail "nvm ain't installed."
+  else
+    for command in $node_commands; unset -f $command
+
+    export NVM_DIR="$HOME/.nvm"
+
+    if [ -x "$(command -v brew)" ] && [ -s $(brew --prefix nvm) ]; then
+      source $(brew --prefix nvm)/nvm.sh
+    elif [ -s "$NVM_DIR/nvm.sh" ]; then
+      source "$NVM_DIR/nvm.sh"
+    else
+      fail "Couldn't find nvm init script..."
+    fi
+
+    # automatically `nvm use` whenever you enter a directory that
+    # contains an `.nvmrc` and specifies a version of node
+    autoload -U add-zsh-hook
+    add-zsh-hook chpwd load-nvmrc
+
+    info "$(nvm current)"
+    success "Ready to node!"
+  fi
 }
 
 load-nvmrc () {
@@ -27,17 +46,30 @@ load-nvmrc () {
 
 # Python versioning for different pythons
 py-up () {
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-  success "Ready to python!"
+  if [ ! -d "$HOME/.pyenv" ]; then
+    fail "pyenv isn't there..."
+  else
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+
+    info "$(pyenv version)"
+    success "Ready to python!"
+  fi
 }
 
-# When you're going to work in ruby do this first
+# When you're going to work in Ruby do this first
 rb-up () {
-  export RVM_DIR="$HOME/.rvm"
-  [[ -s "$RVM_DIR/scripts/rvm" ]] && source "$RVM_DIR/scripts/rvm"
-  # Add RVM to PATH
-  PATH=$PATH:$RVM_DIR/bin
+  if [ ! -d "$HOME/.rbenv" ]; then
+    fail "Where's your rbenv??"
+  else
+    export RBENV_DIR="$HOME/.rbenv"
 
-  success "Ready to ruby!"
+    # Add Ruby bins to PATH
+    export PATH="$RBENV_DIR/bin:$PATH"
+    # Initiate!
+    eval "$(rbenv init -)"
+
+    info "$(rbenv version)"
+    success "Ready to ruby!"
+  fi
 }

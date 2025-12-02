@@ -1,5 +1,6 @@
-# Source antibody bundles
-. $HOME/.zsh_plugins.sh
+# Source antidote bundles
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+antidote load $DOTFILES/home/zsh_plugins.txt
 
 # Source all your favorite zsh files!
 . $DOTFILES/scripts/common.zsh

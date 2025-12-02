@@ -21,9 +21,10 @@ js-up () {
     export NVM_DIR="$HOME/.nvm"
 
     if [ -x "$(command -v brew)" ] && [ -s $(brew --prefix nvm) ]; then
-      source $(brew --prefix nvm)/nvm.sh
+      source $(brew --prefix nvm)/nvm.sh # This loads nvm
     elif [ -s "$NVM_DIR/nvm.sh" ]; then
-      source "$NVM_DIR/nvm.sh"
+      source "$NVM_DIR/nvm.sh" # This loads nvm
+      source "$NVM_DIR/bash_completion" # This loads nvm bash_completion
     else
       fail "Couldn't find nvm init script..."
     fi

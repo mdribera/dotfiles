@@ -1,4 +1,7 @@
+johnhamelink/env-zsh
+jreese/zsh-titles
 rupa/z
+zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
-jreese/zsh-titles
+zsh-users/zsh-syntax-highlighting

@@ -3,6 +3,8 @@ alias reload=". ~/.zshrc"
 alias gst="git status"
 alias gd="git diff"
 alias gc="git commit -m $1"
+alias gsh="git stash"
+alias gsha="git stash apply"
 
 if [ "$OS_TYPE" = "Darwin" ]; then
   if [ -x "$(command -v gls)" ]; then

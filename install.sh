@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Links all the dot things and installs all the antibody things.
+# Links all the dot things and installs all the antidote things.
 set -e
 
 DOTFILES=$HOME/.dotfiles
@@ -54,31 +54,21 @@ install_zsh () {
   fi
 }
 
-get_antibody () {
-  info "Getting antibody..."
+get_antidote () {
+  info "Getting antidote..."
 
-  if ! [ -x "$(command -v antibody)" ]; then
+  if ! [ -x "$(command -v antidote)" ]; then
     if [ -x "$(command -v brew)" ]; then
-      brew install getantibody/tap/antibody || brew upgrade antibody
+      brew install antidote || brew upgrade antidote
     else
-      curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
+      git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
     fi
   fi
 
-  success "Got antibody!"
-}
-
-get_bundles () {
-  info "Installing and updating zsh bundles..."
-
-  antibody bundle < $DOTFILES/home/zsh_plugins.txt > $HOME/.zsh_plugins.sh
-  antibody update
-
-  success "Installed and updated zsh bundles!"
+  success "Got antidote!"
 }
 
 link_dotdir
 link_dotfiles
 install_zsh
-get_antibody
-get_bundles
+get_antidote

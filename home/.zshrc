@@ -12,7 +12,7 @@ if [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
 fi
 
 # Source antidote bundles
-if [ -s "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh" ]; then
+if [ -x "$(command -v brew)" ]; then
     source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 elif [ -s "$HOME/.antidote/antidote.zsh" ]; then
     source $HOME/.antidote/antidote.zsh

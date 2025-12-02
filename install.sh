@@ -58,11 +58,7 @@ get_antidote () {
   info "Getting antidote..."
 
   if ! [ -x "$(command -v antidote)" ]; then
-    if [ -x "$(command -v brew)" ]; then
-      brew install antidote || brew upgrade antidote
-    else
-      git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
-    fi
+    git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
   fi
 
   success "Got antidote!"

@@ -11,11 +11,8 @@ if [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# Source antidote bundles
-if [ -x "$(command -v brew)" ]; then
-    source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-elif [ -s "$HOME/.antidote/antidote.zsh" ]; then
+# Source and load antidote bundles
+if [ -s "$HOME/.antidote/antidote.zsh" ]; then
     source $HOME/.antidote/antidote.zsh
+    antidote load "$DOTFILES/home/zsh_plugins.txt"
 fi
-# Load the antidote plugins
-[ -x "$(command -v antidote)" ] && antidote load $DOTFILES/home/zsh_plugins.txt

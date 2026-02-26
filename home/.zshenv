@@ -15,12 +15,9 @@ export HISTORY_SUBSTRING_SEARCH_FUZZY=false
 # nvm: resolve default node version and put its bin on PATH without sourcing nvm
 export NVM_DIR="$HOME/.nvm"
 if [ -d "$NVM_DIR/versions/node" ]; then
-  _nvm_default=$(cat "$NVM_DIR/alias/default" 2>/dev/null)
-  if [ -n "$_nvm_default" ]; then
-    _nvm_node_bin=$(ls -d "$NVM_DIR/versions/node/v${_nvm_default}"*/bin 2>/dev/null | sort -V | tail -1)
-    [ -n "$_nvm_node_bin" ] && export PATH="$_nvm_node_bin:$PATH"
-  fi
-  unset _nvm_default _nvm_node_bin
+  _nvm_node_bin=$(ls -d "$NVM_DIR/versions/node/v"*/bin 2>/dev/null | sort -V | tail -1)
+  [ -n "$_nvm_node_bin" ] && export PATH="$_nvm_node_bin:$PATH"
+  unset _nvm_node_bin
 fi
 
 # pyenv: shims resolve to the correct python version automatically

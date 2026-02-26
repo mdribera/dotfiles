@@ -61,6 +61,82 @@ export LS_COLORS="di=1;36:ln=1;35:so=1;32:pi=1;33:ex=31:bd=34;46:cd=34;43:su=30;
 export LSCOLORS=GxFxCxDxbxegedabagacad
 
 ##
+# Lazy loading for language runtimes
+# .zshenv puts the default binaries on PATH for non-interactive use.
+# These stubs and *-up functions are for interactive shells: they load the
+# full version manager on first use so you get version-switching, completions, etc.
+##
+node_commands=(nvm node npm)
+
+for _cmd in $node_commands; do
+  if ! command -v $_cmd &>/dev/null; then
+    $_cmd() {
+      info "Node environment isn't setup. Just a sec..."
+      js-up && $0 "$@"
+    }
+  fi
+done
+unset _cmd
+
+js-up () {
+  if [ ! -d "$HOME/.nvm" ]; then
+    fail "nvm ain't installed."
+  else
+    for cmd in $node_commands; do unset -f $cmd 2>/dev/null; done
+
+    export NVM_DIR="$HOME/.nvm"
+
+    if [ -x "$(command -v brew)" ] && [ -s "$(brew --prefix nvm)/nvm.sh" ]; then
+      source "$(brew --prefix nvm)/nvm.sh"
+    elif [ -s "$NVM_DIR/nvm.sh" ]; then
+      source "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+    else
+      fail "Couldn't find nvm init script..."
+      return 1
+    fi
+
+    autoload -U add-zsh-hook
+    add-zsh-hook chpwd load-nvmrc
+    load-nvmrc
+
+    info "$(nvm current)"
+    success "Ready to node!"
+  fi
+}
+
+load-nvmrc () {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  fi
+}
+
+py-up () {
+  if [ ! -d "$HOME/.pyenv" ]; then
+    fail "pyenv isn't there..."
+  else
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+
+    info "$(pyenv version)"
+    success "Ready to python!"
+  fi
+}
+
+rb-up () {
+  if [ ! -d "$HOME/.rbenv" ]; then
+    fail "Where's your rbenv??"
+  else
+    export RBENV_DIR="$HOME/.rbenv"
+    export PATH="$RBENV_DIR/bin:$PATH"
+    eval "$(rbenv init -)"
+
+    info "$(rbenv version)"
+    success "Ready to ruby!"
+  fi
+}
+
+##
 # Completion
 ##
 autoload -U compinit

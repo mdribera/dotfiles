@@ -4,7 +4,7 @@
 . $DOTFILES/scripts/config.zsh
 
 # A bin you can call your very own
-PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 # Inject homebrew
 if [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]; then

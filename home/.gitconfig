@@ -7,7 +7,7 @@
 [core]
 	excludesFile = ~/.gitignore_global
 	autocrlf = input
-	editor = vim
+	editor = nano
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [help]
 	autocorrect = 20

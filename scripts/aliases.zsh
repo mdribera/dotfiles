@@ -2,7 +2,7 @@ alias reload=". ~/.zshrc"
 
 alias gst="git status"
 alias gd="git diff"
-alias gc="git commit -m $1"
+gc() { git commit -m "$1" }
 alias gsh="git stash"
 alias gsha="git stash apply"
 
@@ -23,6 +23,8 @@ alias iplz="localip && extip"
 alias server="python -m http.server"
 
 alias bye="pmset displaysleepnow"
+
+alias code="flatpak run com.visualstudio.code"
 
 local _webstorm_path="/usr/local/bin/webstorm"
 if [[ -a $_webstorm_path ]]; then

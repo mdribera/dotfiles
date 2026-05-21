@@ -130,8 +130,10 @@ install_zsh () {
 get_antidote () {
   info "Getting antidote..."
 
-  if ! [ -x "$(command -v antidote)" ]; then
-    git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
+  local antidote_dir="${ZDOTDIR:-$HOME}/.antidote"
+
+  if [ ! -d "$antidote_dir" ]; then
+    git clone --depth=1 https://github.com/mattmc3/antidote.git "$antidote_dir"
   fi
 
   success "Got antidote!"
